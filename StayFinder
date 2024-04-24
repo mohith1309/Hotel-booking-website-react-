@@ -1,0 +1,72 @@
+import React, { useState } from 'react';
+
+const HotelBooking = () => {
+  // State to manage booking details
+  const [bookingDetails, setBookingDetails] = useState({
+    checkInDate: '',
+    checkOutDate: '',
+    numberOfGuests: 1,
+  });
+
+  // Function to handle changes in booking details
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBookingDetails({
+      ...bookingDetails,
+      [name]: value,
+    });
+  };
+
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Logic for handling form submission
+    console.log("Booking Details:", bookingDetails);
+    // You can add logic here to send the booking details to a backend server
+  };
+
+  return (
+    <div>
+      <h1>Hotel Booking</h1>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Check-In Date:
+          <input
+            type="date"
+            name="checkInDate"
+            value={bookingDetails.checkInDate}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Check-Out Date:
+          <input
+            type="date"
+            name="checkOutDate"
+            value={bookingDetails.checkOutDate}
+            onChange={handleInputChange}
+            required
+          />
+        </label>
+        <br />
+        <label>
+          Number of Guests:
+          <input
+            type="number"
+            name="numberOfGuests"
+            value={bookingDetails.numberOfGuests}
+            onChange={handleInputChange}
+            min="1"
+            required
+          />
+        </label>
+        <br />
+        <button type="submit">Book Now</button>
+      </form>
+    </div>
+  );
+};
+
+export default HotelBooking;
